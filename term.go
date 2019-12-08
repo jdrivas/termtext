@@ -34,7 +34,7 @@ var (
 	Alert     = color.New(color.FgRed).SprintfFunc()
 )
 
-var screen = screenDarkValue
+var screen = ScreenDarkValue
 
 func InitTerm() {
 	if vconfig.Debug() {
