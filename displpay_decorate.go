@@ -121,9 +121,9 @@ func displpayServerStopedF(stopped bool, resp *http.Response, err error) func() 
 func render(renderer func(), resp *http.Response, err error) {
 
 	switch {
-	case config.Debug():
+	case vconfig.Debug():
 		httpDecorate((errorDecorate(renderer, err)), resp)()
-	case config.Verbose():
+	case vconfig.Verbose():
 		shortHTTPDecorate((errorDecorate(renderer, err)), resp)()
 	default:
 

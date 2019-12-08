@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/fatih/color"
-	"github.com/jdrivas/gafw/config"
+	"github.com/jdrivas/vconfig"
 	"github.com/spf13/viper"
 )
 
@@ -29,14 +29,14 @@ var (
 	Alert     = color.New(color.FgRed).SprintfFunc()
 )
 
-var screen = config.ScreenDarkValue
+var screen = vconfig.ScreenDarkValue
 
 func InitTerm() {
-	if config.Debug() {
+	if vconfig.Debug() {
 		fmt.Printf("Initing Term.\n")
 	}
-	screen = viper.GetString(config.ScreenProfileKey)
-	if screen == config.ScreenDarkValue {
+	screen = viper.GetString(vconfig.ScreenProfileKey)
+	if screen == vconfig.ScreenDarkValue {
 		fmt.Printf("Doing Dark collors.\n")
 		// Text Formatting
 		Title = color.New(color.FgHiWhite).SprintfFunc()
@@ -53,7 +53,7 @@ func InitTerm() {
 
 	}
 
-	if config.Debug() {
+	if vconfig.Debug() {
 		fmt.Printf("%s %s %s %s\n", Title("Title"), SubTitle("SubTitle"), Text("Text"), Highlight("Highlight"))
 	}
 }
