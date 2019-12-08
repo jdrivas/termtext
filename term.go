@@ -14,6 +14,11 @@ import (
 // Use this with github.com/juju/ansi term to get a TabWriter that works with color.
 type ColorSprintfFunc func(string, ...interface{}) string
 
+const (
+	ScreenProfileKey = "screenProfileKey"
+	ScreenDarkValue  = "dark"
+)
+
 var (
 	// Text Formatting
 	Title    = color.New(color.FgBlack).SprintfFunc()
@@ -29,14 +34,14 @@ var (
 	Alert     = color.New(color.FgRed).SprintfFunc()
 )
 
-var screen = vconfig.ScreenDarkValue
+var screen = screenDarkValue
 
 func InitTerm() {
 	if vconfig.Debug() {
 		fmt.Printf("Initing Term.\n")
 	}
-	screen = viper.GetString(vconfig.ScreenProfileKey)
-	if screen == vconfig.ScreenDarkValue {
+	screen = viper.GetString(ScreenProfileKey)
+	if screen == ScreenDarkValue {
 		fmt.Printf("Doing Dark collors.\n")
 		// Text Formatting
 		Title = color.New(color.FgHiWhite).SprintfFunc()
@@ -54,7 +59,7 @@ func InitTerm() {
 	}
 
 	if vconfig.Debug() {
-		fmt.Printf("%s %s %s %s\n", Title("Title"), SubTitle("SubTitle"), Text("Text"), Highlight("Highlight"))
+		fmt.Printf("Term inited: %s %s %s %s\n", Title("Title"), SubTitle("SubTitle"), Text("Text"), Highlight("Highlight"))
 	}
 }
 
