@@ -41,8 +41,13 @@ github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0/go.mod h1:8NvIoxWQoOIhqOTXgf
 github.com/grpc-ecosystem/grpc-gateway v1.9.0/go.mod h1:vNeuVxBJEsws4ogUvrchl83t/GYV9WGTSLVdBhOQFDY=
 github.com/hashicorp/hcl v1.0.0 h1:0Anlzjpi4vEasTeNFn2mLJgTSwt0+6sfsiTG8qcWGx4=
 github.com/hashicorp/hcl v1.0.0/go.mod h1:E5yfLk+7swimpb2L/Alb/PJmXilQ/rhwaUYs4T20WEQ=
+github.com/jdrivas/conman v0.1.2 h1:ge2gGkELZqpQQgkI/SevrbnyTeU/lNYXKBwczZm4EK8=
+github.com/jdrivas/conman v0.1.2/go.mod h1:daKCxf01YU/EeoEuPhCpN2TOUED/Ayz8vTH1QREqnk4=
+github.com/jdrivas/termtext v0.2.2/go.mod h1:VAJNGiEujKfnT6CLwuuLRD/HhoAehGmePowu6Mq3DJI=
 github.com/jdrivas/vconfig v0.0.0-20191208212235-11e9161c616b h1:TowA2KZO40L4g+RdHnXlxgha6+D33mbh/YWSkP9NqtQ=
 github.com/jdrivas/vconfig v0.0.0-20191208212235-11e9161c616b/go.mod h1:2IoirZoQt1eYgVlqTRUTOV3N+6nFYFM8PRNvBjhBnGo=
+github.com/jdrivas/vconfig v0.2.1 h1:L11TGdHzt4q7jZI+q0snzbysMPDT5mw8hexTUTT5oVs=
+github.com/jdrivas/vconfig v0.2.1/go.mod h1:2IoirZoQt1eYgVlqTRUTOV3N+6nFYFM8PRNvBjhBnGo=
 github.com/jonboulle/clockwork v0.1.0/go.mod h1:Ii8DK3G1RaLaWxj9trq07+26W01tbo22gdxWY5EU2bo=
 github.com/jtolds/gls v4.20.0+incompatible/go.mod h1:QJZ7F/aHp+rZTRtaJ1ow/lLfFfVYBRgL+9YlvaHOwJU=
 github.com/juju/ansiterm v0.0.0-20180109212912-720a0952cc2a h1:FaWFmfWdAUKbSCtOU2QjDaorUexogfaMgbipgYATUMU=

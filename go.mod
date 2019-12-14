@@ -4,10 +4,8 @@ go 1.13
 
 require (
 	github.com/fatih/color v1.7.0
-	github.com/jdrivas/vconfig v0.0.0-20191208212235-11e9161c616b
+	github.com/jdrivas/conman v0.1.2
+	github.com/jdrivas/vconfig v0.2.1
 	github.com/juju/ansiterm v0.0.0-20180109212912-720a0952cc2a
-	github.com/lunixbochs/vtclean v1.0.0 // indirect
-	github.com/mattn/go-colorable v0.1.4 // indirect
-	github.com/mattn/go-isatty v0.0.10 // indirect
 	github.com/spf13/viper v1.6.1
 )

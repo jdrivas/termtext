@@ -4,12 +4,11 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/jdrivas/vconfig"
+	"github.com/juju/ansiterm"
 	"io/ioutil"
 	"net/http"
 	"os"
-
-	"github.com/jdrivas/vconfig"
-	"github.com/juju/ansiterm"
 )
 
 // We want to decorate List and Describe with some context dependent
@@ -48,12 +47,10 @@ type Listable interface {
 	List()
 }
 
-/*
 // Describable supports Describe()
 type Describable interface {
 	Describe()
 }
-*/
 
 // List and Describe display their objects by calling render, but
 // first checking that an object is there. If not they send along
@@ -66,7 +63,6 @@ func List(d Listable, resp *http.Response, err error) {
 	render(renderer, resp, err)
 }
 
-/*
 // Describe provides detailed output on the object.
 func Describe(d Describable, resp *http.Response, err error) {
 	renderer := func() {}
@@ -76,6 +72,7 @@ func Describe(d Describable, resp *http.Response, err error) {
 	render(renderer, resp, err)
 }
 
+/*
 // Display dispolays only the resp and error through the normal pipeline
 func Display(resp *http.Response, err error) {
 	render(func() {}, resp, err)
