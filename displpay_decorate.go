@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/jdrivas/vconfig"
 	"github.com/juju/ansiterm"
+	"github.com/spf13/viper"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -114,6 +115,16 @@ func displpayServerStopedF(stopped bool, resp *http.Response, err error) func() 
 }
 */
 
+// Viper Configuration values.
+
+// JsonDisplayKey controls output. If set only JSON is displayed
+// for renders which have response objects.
+// For example, in a yaml configuration file you can set:
+// Termtext:
+//    JSONDisplay: True
+//
+const JSONDisplayKey = "Termtext.JSONDisplay" // bool
+
 // private API
 func render(renderer func(), resp *http.Response, err error) {
 
@@ -122,8 +133,13 @@ func render(renderer func(), resp *http.Response, err error) {
 		httpDecorate((errorDecorate(renderer, err)), resp)()
 	case vconfig.Verbose():
 		shortHTTPDecorate((errorDecorate(renderer, err)), resp)()
+	case viper.GetBool(JSONDisplayKey):
+		if resp != nil {
+			jsonDisplay(resp, err)
+			return
+		}
+		fallthrough
 	default:
-
 		if err == nil {
 			errorDecorate(renderer, err)()
 		} else {
@@ -139,7 +155,30 @@ func render(renderer func(), resp *http.Response, err error) {
 
 // HTTPDisplay - This is for the HTTP direct commands.
 func HTTPDisplay(resp *http.Response, err error) {
-	httpDecorate(errorDecorate(func() {}, err), resp)()
+	if viper.GetBool(JSONDisplayKey) {
+		jsonDisplay(resp, err)
+	} else {
+		httpDecorate(errorDecorate(func() {}, err), resp)()
+	}
+}
+
+// Raw JSON display, no decoration.
+func jsonDisplay(resp *http.Response, err error) {
+
+	body, err := ioutil.ReadAll(resp.Body)
+	defer resp.Body.Close()
+	if err == nil && resp.StatusCode != http.StatusNoContent {
+		prettyJSON := bytes.Buffer{}
+		err := json.Indent(&prettyJSON, body, "", "  ")
+		if err == nil {
+			prettyJSON.WriteTo(os.Stdout)
+			fmt.Println()
+		} else {
+			fmt.Printf("%s", string(body))
+		}
+	} else {
+		fmt.Printf("Body read error: %v\n", err)
+	}
 }
 
 func errorDecorate(f func(), err error) func() {
