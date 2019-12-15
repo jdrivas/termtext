@@ -23,7 +23,7 @@ var (
 	// Text Formatting
 	Title    = color.New(color.FgBlack).SprintfFunc()
 	SubTitle = color.New(color.FgHiBlack).SprintfFunc()
-	Text     = color.New(color.FgHiCyan).SprintfFunc()
+	Text     = color.New(color.FgHiBlack).SprintfFunc()
 
 	// Semantic Formatting
 	Info      = color.New(color.FgBlack).SprintfFunc()
