@@ -115,16 +115,6 @@ func displpayServerStopedF(stopped bool, resp *http.Response, err error) func() 
 }
 */
 
-// Viper Configuration values.
-
-// JsonDisplayKey controls output. If set only JSON is displayed
-// for renders which have response objects.
-// For example, in a yaml configuration file you can set:
-// Termtext:
-//    JSONDisplay: True
-//
-const JSONDisplayKey = "Termtext.JSONDisplay" // bool
-
 // private API
 func render(renderer func(), resp *http.Response, err error) {
 
