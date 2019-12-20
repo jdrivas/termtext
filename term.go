@@ -8,22 +8,6 @@ import (
 	"github.com/spf13/viper"
 )
 
-const (
-	ScreenProfileKey        = "Termtext.screenProfile" // Viper Key for profile name - string
-	ScreenNoColorDefaultKey = "termtextNoColor"        // No Color profile
-	ScreenDarkDefaultKey    = "termtextDarkDefault"    // Dark Profile
-	ScreenLightDefaultKey   = "termtextLightDefault"   // Light Profile
-)
-
-// JSONDisplayKey controls output.
-// If set only JSON is displayed
-// for renders which have response objects.
-// For example, in a yaml configuration file you can set:
-// Termtext:
-//    JSONDisplay: True
-//
-const JSONDisplayKey = "Termtext.JSONDisplay" // bool
-
 // Use this with github.com/juju/ansi term to get a TabWriter that works with color.
 type ColorSprintfFunc func(string, ...interface{}) string
 
