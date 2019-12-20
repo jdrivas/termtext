@@ -115,6 +115,8 @@ func Error(err error) string {
 // func Title(s string, args ...interface{}) string {
 //   ScreenProfile.Title( ...... )
 // }
+// It's true the set up is more expensive, but it does remove a
+// function call from the execution path ......
 //
 // These are used to surround strings with color.
 // e.g. fmt.Printf(t.Title("This is a title"))
@@ -147,4 +149,8 @@ func setScreenProfile(p *Profile) {
 	Fail = p.Fail
 	Alert = p.Alert
 
+}
+
+func init() {
+	setScreenProfile(noColorDefaultProfile)
 }
