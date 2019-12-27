@@ -8,7 +8,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-// Use this with github.com/juju/ansi term to get a TabWriter that works with color.
+// ColorSprintfFunc use this with github.com/juju/ansi term to get a TabWriter that works with color.
 type ColorSprintfFunc func(string, ...interface{}) string
 
 type Profile struct {
@@ -71,20 +71,26 @@ var profiles = profileMap{
 // ScreenProfile is the current screen profile.
 var screenProfile *Profile = noColorDefaultProfile
 
+// InitTerm sets profile defaults from viper.
 func InitTerm() {
 	if vconfig.Debug() {
-		fmt.Printf("Initing Term.\n")
+		Pef()
+		defer Pxf()
 	}
 
-	// See if we have a profile default
-	if profile, ok := profiles[viper.GetString(ScreenProfileKey)]; ok {
+	// See if a profile has been set, othewise use the default.
+	pn := viper.GetString(ScreenProfileKey)
+	if profile, ok := profiles[pn]; ok {
+		// fmt.Printf("Updating profile to: %s\n", pn)
 		setScreenProfile(profile)
 	} else {
+		// fmt.Printf("Using default profile: %s\n", noColorDefaultProfile.Name)
 		setScreenProfile(noColorDefaultProfile)
 	}
 
 	if vconfig.Debug() {
-		fmt.Printf("Term inited: %s %s %s %s\n", Title("Title"), SubTitle("SubTitle"), Text("Text"), Highlight("Highlight"))
+		fmt.Printf("Term inited with profile \"%s\": %s %s %s %s\n",
+			Title(screenProfile.Name), Title("Title"), SubTitle("SubTitle"), Text("Text"), Highlight("Highlight"))
 	}
 }
 
