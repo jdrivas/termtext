@@ -24,14 +24,21 @@ func Pxf() {
 }
 
 func printLString(e string, df ColorSprintfFunc) {
-	fc, fl, ln := locString(3) // 3 is a magic number: not this func, or the one above ...
+	fc, fl, ln := loc(2) // not this function, but or the caller, but the callers caller.
 	w := ansiterm.NewTabWriter(os.Stdout, 6, 2, 1, ' ', 0)
 	fmt.Fprintf(w, df("%s\t%s()\t%s:%d\n", e, fc, fl, ln))
 	w.Flush()
 }
 
-func locString(d int) (fnc, file string, line int) {
-	if pc, fl, l, ok := runtime.Caller(d); ok {
+// LocString string for function and file location of depth d.
+// 0 is depth of the function calling LocString, 1 is the callers caller etc.
+func LocString(d int) string {
+	fc, fl, ln := loc(d + 1)
+	return fmt.Sprintf("%s() %s:%d", fc, fl, ln)
+}
+
+func loc(d int) (fnc, file string, line int) {
+	if pc, fl, l, ok := runtime.Caller(d + 1); ok { // d is relative to the calling function.
 		f := runtime.FuncForPC(pc)
 		fnc = filepath.Base(f.Name())
 		file = filepath.Base(fl)
